@@ -12,7 +12,7 @@ export function Input({ className, label, error, ...props }) {
         className={cn(
           'w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5',
           'text-sm text-white placeholder-white/20',
-          'focus:outline-none focus:border-red-500/60 focus:bg-white/[0.05]',
+          'focus:outline-none focus:border-violet-500/60 focus:bg-white/[0.05]',
           'transition-all duration-200',
           error && 'border-red-500/50',
           className
@@ -36,7 +36,7 @@ export function Select({ className, label, children, ...props }) {
         className={cn(
           'w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5',
           'text-sm text-white',
-          'focus:outline-none focus:border-red-500/60',
+          'focus:outline-none focus:border-violet-500/60',
           'transition-all duration-200',
           className
         )}

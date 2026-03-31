@@ -34,14 +34,14 @@
   ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.15); }
 
   /* Selection */
-  ::selection { background: rgba(239,68,68,0.25); color: #fff; }
+  ::selection { background: rgba(139,92,246,0.25); color: #fff; }
 
   /* Form resets */
   input, textarea, select {
     font-family: inherit;
     font-size: 14px;
   }
-  input[type="checkbox"] { accent-color: #ef4444; }
+  input[type="checkbox"] { accent-color: #8b5cf6; }
 
   button { cursor: pointer; font-family: inherit; }
 }

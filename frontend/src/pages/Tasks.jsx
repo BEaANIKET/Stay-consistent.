@@ -216,7 +216,7 @@ export default function Tasks() {
       {/* Mobile FAB */}
       <button
         onClick={() => setShowModal(true)}
-        className="sm:hidden fixed bottom-6 right-6 w-14 h-14 bg-red-600 hover:bg-red-500 active:bg-red-700 text-white rounded-full shadow-xl shadow-red-600/30 flex items-center justify-center transition-all active:scale-90 z-30"
+        className="sm:hidden fixed bottom-6 right-6 w-14 h-14 bg-violet-600 hover:bg-violet-500 active:bg-violet-700 text-white rounded-full shadow-xl shadow-violet-600/30 flex items-center justify-center transition-all active:scale-90 z-30"
       >
         <Plus size={22} />
       </button>
@@ -246,7 +246,7 @@ export default function Tasks() {
               className={cn(
                 'w-10 h-6 rounded-full border transition-all duration-200 flex items-center px-0.5',
                 form.required
-                  ? 'bg-red-600 border-red-600'
+                  ? 'bg-violet-600 border-violet-600'
                   : 'bg-white/5 border-white/10'
               )}
             >

@@ -8,7 +8,7 @@ export default function Landing() {
       {/* Nav */}
       <nav className="flex items-center justify-between px-6 md:px-10 py-4 border-b border-white/[0.06] sticky top-0 z-50 backdrop-blur-xl bg-[#0a0a0a]/80">
         <div className="flex items-center gap-2">
-          <div className="w-7 h-7 bg-red-600 rounded-lg flex items-center justify-center shadow-lg shadow-red-600/30">
+          <div className="w-7 h-7 bg-violet-600 rounded-lg flex items-center justify-center shadow-lg shadow-violet-600/30">
             <Zap size={14} fill="white" stroke="white" />
           </div>
           <span className="text-sm font-bold text-white tracking-tight">DisciplineOS</span>
@@ -22,7 +22,7 @@ export default function Landing() {
           </Link>
           <Link
             to="/register"
-            className="text-sm bg-red-600 hover:bg-red-500 active:bg-red-700 text-white px-5 py-2 rounded-full font-semibold transition-all shadow-lg shadow-red-600/25"
+            className="text-sm bg-violet-600 hover:bg-violet-500 active:bg-violet-700 text-white px-5 py-2 rounded-full font-semibold transition-all shadow-lg shadow-violet-600/25"
           >
             Start Now
           </Link>
@@ -33,15 +33,15 @@ export default function Landing() {
       <div className="flex-1 flex flex-col items-center justify-center text-center px-6 py-16 md:py-24">
 
         {/* Tag */}
-        <div className="inline-flex items-center gap-2 bg-red-500/8 border border-red-500/20 text-red-400 text-xs px-4 py-2 rounded-full mb-8 font-medium">
-          <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+        <div className="inline-flex items-center gap-2 bg-violet-500/8 border border-violet-500/20 text-violet-400 text-xs px-4 py-2 rounded-full mb-8 font-medium">
+          <span className="w-1.5 h-1.5 rounded-full bg-violet-500 animate-pulse" />
           No excuses. No shortcuts. No days off.
         </div>
 
         {/* Headline */}
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-[1.1] tracking-tight mb-6 max-w-3xl">
           Build discipline.<br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-600">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-violet-600">
             Break the cycle.
           </span>
         </h1>
@@ -54,7 +54,7 @@ export default function Landing() {
         <div className="flex flex-col sm:flex-row items-center gap-3">
           <Link
             to="/register"
-            className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-500 active:bg-red-700 text-white px-8 py-3.5 rounded-full text-sm font-semibold transition-all shadow-xl shadow-red-600/25 w-full sm:w-auto justify-center"
+            className="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 active:bg-violet-700 text-white px-8 py-3.5 rounded-full text-sm font-semibold transition-all shadow-xl shadow-violet-600/25 w-full sm:w-auto justify-center"
           >
             Start for free <ArrowRight size={16} />
           </Link>
@@ -73,7 +73,7 @@ export default function Landing() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-20 max-w-3xl w-full text-left">
           {[
             {
-              icon: <Shield size={18} className="text-red-400" />,
+              icon: <Shield size={18} className="text-violet-400" />,
               title: 'Strict Mode',
               desc: 'Cannot edit past days. Miss a day — auto fail. No backdating, no excuses.',
             },

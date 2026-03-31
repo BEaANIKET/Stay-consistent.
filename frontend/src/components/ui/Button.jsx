@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 
 const variants = {
-  default:   'bg-red-600 hover:bg-red-500 active:bg-red-700 text-white shadow-lg shadow-red-600/20',
+  default:   'bg-violet-600 hover:bg-violet-500 active:bg-violet-700 text-white shadow-lg shadow-violet-600/20',
   outline:   'border border-white/10 hover:border-white/20 hover:bg-white/5 text-white/70 hover:text-white bg-transparent',
   ghost:     'hover:bg-white/5 text-white/50 hover:text-white bg-transparent',
   success:   'bg-green-600 hover:bg-green-500 active:bg-green-700 text-white shadow-lg shadow-green-600/20',

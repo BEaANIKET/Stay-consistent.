@@ -32,12 +32,12 @@ export default function Login() {
   return (
     <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-4 py-12">
       {/* Background glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-red-600/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-violet-600/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative w-full max-w-sm">
         {/* Logo */}
         <div className="flex flex-col items-center mb-8">
-          <div className="w-10 h-10 bg-red-600 rounded-2xl flex items-center justify-center shadow-xl shadow-red-600/30 mb-4">
+          <div className="w-10 h-10 bg-violet-600 rounded-2xl flex items-center justify-center shadow-xl shadow-violet-600/30 mb-4">
             <Zap size={18} fill="white" stroke="white" />
           </div>
           <h1 className="text-xl font-bold text-white">Welcome back</h1>
@@ -75,7 +75,7 @@ export default function Login() {
                   onChange={(e) => setForm({ ...form, password: e.target.value })}
                   required
                   autoComplete="current-password"
-                  className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5 pr-10 text-sm text-white placeholder-white/20 focus:outline-none focus:border-red-500/60 focus:bg-white/[0.05] transition-all duration-200"
+                  className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5 pr-10 text-sm text-white placeholder-white/20 focus:outline-none focus:border-violet-500/60 focus:bg-white/[0.05] transition-all duration-200"
                 />
                 <button
                   type="button"
@@ -95,7 +95,7 @@ export default function Login() {
 
         <p className="text-xs text-white/30 text-center mt-5">
           No account?{' '}
-          <Link to="/register" className="text-red-400 hover:text-red-300 font-medium transition-colors">
+          <Link to="/register" className="text-violet-400 hover:text-violet-300 font-medium transition-colors">
             Create one
           </Link>
         </p>

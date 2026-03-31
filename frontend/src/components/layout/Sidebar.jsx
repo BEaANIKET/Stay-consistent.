@@ -48,7 +48,7 @@ export default function Sidebar({ onClose, isMobile }) {
       {/* Header */}
       <div className="flex items-center justify-between px-5 pt-6 pb-2">
         <div className="flex items-center gap-2">
-          <div className="w-7 h-7 bg-red-600 rounded-lg flex items-center justify-center shadow-lg shadow-red-600/30">
+          <div className="w-7 h-7 bg-violet-600 rounded-lg flex items-center justify-center shadow-lg shadow-violet-600/30">
             <Zap size={14} fill="white" stroke="white" />
           </div>
           <span className="text-sm font-bold text-white tracking-tight">DisciplineOS</span>
@@ -84,12 +84,12 @@ export default function Sidebar({ onClose, isMobile }) {
                 size={16}
                 className={cn(
                   'shrink-0 transition-colors',
-                  active ? 'text-red-400' : 'text-white/30 group-hover:text-white/60'
+                  active ? 'text-violet-400' : 'text-white/30 group-hover:text-white/60'
                 )}
               />
               {label}
               {active && (
-                <span className="ml-auto w-1.5 h-1.5 rounded-full bg-red-500" />
+                <span className="ml-auto w-1.5 h-1.5 rounded-full bg-violet-500" />
               )}
             </NavLink>
           );
