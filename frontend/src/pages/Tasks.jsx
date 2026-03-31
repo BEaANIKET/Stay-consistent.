@@ -216,7 +216,7 @@ export default function Tasks() {
       {/* Mobile FAB */}
       <button
         onClick={() => setShowModal(true)}
-        className="sm:hidden fixed bottom-6 right-6 w-14 h-14 bg-violet-600 hover:bg-violet-500 active:bg-violet-700 text-white rounded-full shadow-xl shadow-violet-600/30 flex items-center justify-center transition-all active:scale-90 z-30"
+        className="sm:hidden fixed bottom-24 right-6 w-14 h-14 bg-violet-600 hover:bg-violet-500 active:bg-violet-700 text-white rounded-full shadow-xl shadow-violet-600/30 flex items-center justify-center transition-all active:scale-90 z-30"
       >
         <Plus size={22} />
       </button>
