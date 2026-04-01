@@ -1,7 +1,7 @@
 const DailyLog = require('../models/DailyLog');
 const Task = require('../models/Task');
 const User = require('../models/User');
-const { getTodayDateString } = require('../utils/dateUtils');
+const { getTodayDateString, isTaskActiveOnDate } = require('../utils/dateUtils');
 
 const POINTS_COMPLETE = 5;
 const POINTS_FAIL = -10;
@@ -12,8 +12,10 @@ const ensureTodayLog = async (userId) => {
   let log = await DailyLog.findOne({ userId, date: today });
 
   if (!log) {
-    const tasks = await Task.find({ userId, isActive: true });
-    const taskEntries = tasks.map(t => ({ taskId: t._id, status: 'pending' }));
+    const allTasks = await Task.find({ userId, isActive: true });
+    const taskEntries = allTasks
+      .filter(t => isTaskActiveOnDate(t, today))
+      .map(t => ({ taskId: t._id, status: 'pending' }));
     log = await DailyLog.create({ userId, date: today, tasks: taskEntries });
   }
 
