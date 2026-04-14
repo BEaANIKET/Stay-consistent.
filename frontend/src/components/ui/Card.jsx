@@ -4,9 +4,14 @@ export function Card({ children, className, hover = false, ...props }) {
   return (
     <div
       className={cn(
-        'bg-[#111] border border-white/[0.07] rounded-2xl p-5',
-        'shadow-[0_0_30px_rgba(0,0,0,0.35)]',
-        hover && 'transition-all duration-300 hover:scale-[1.02] hover:border-white/15 cursor-pointer',
+        'rounded-2xl border p-5',
+        'bg-surface border-border',
+        'shadow-[0_1px_3px_rgba(0,0,0,0.4),0_0_0_1px_rgba(255,255,255,0.02)]',
+        hover && [
+          'transition-all duration-200 cursor-pointer',
+          'hover:bg-surface-hover hover:border-border-subtle',
+          'hover:shadow-[0_4px_16px_rgba(0,0,0,0.4),0_0_0_1px_rgba(255,255,255,0.04)]',
+        ],
         className
       )}
       {...props}
@@ -22,7 +27,10 @@ export function CardHeader({ children, className }) {
 
 export function CardTitle({ children, className }) {
   return (
-    <p className={cn('text-xs font-medium uppercase tracking-widest text-white/40', className)}>
+    <p className={cn(
+      'text-[10px] font-semibold uppercase tracking-[0.12em] text-text-muted',
+      className
+    )}>
       {children}
     </p>
   );
@@ -30,7 +38,7 @@ export function CardTitle({ children, className }) {
 
 export function CardValue({ children, className }) {
   return (
-    <div className={cn('text-3xl font-bold text-white mt-1 tracking-tight', className)}>
+    <div className={cn('text-3xl font-bold tracking-tight text-text-primary mt-1', className)}>
       {children}
     </div>
   );
@@ -38,15 +46,22 @@ export function CardValue({ children, className }) {
 
 export function StatCard({ title, value, sub, valueClass, icon }) {
   return (
-    <Card className="flex flex-col gap-1.5">
+    <Card className="flex flex-col gap-2 group">
       <div className="flex items-center justify-between">
         <CardTitle>{title}</CardTitle>
-        {icon && <span className="text-white/20">{icon}</span>}
+        {icon && (
+          <span className="text-text-faint transition-colors duration-200 group-hover:text-text-muted">
+            {icon}
+          </span>
+        )}
       </div>
-      <div className={cn('text-2xl md:text-3xl font-bold tracking-tight', valueClass ?? 'text-white')}>
+      <div className={cn(
+        'text-2xl font-bold tracking-tight tabular-nums',
+        valueClass ?? 'text-text-primary'
+      )}>
         {value}
       </div>
-      {sub && <p className="text-xs text-white/35">{sub}</p>}
+      {sub && <p className="text-[11px] text-text-muted leading-snug">{sub}</p>}
     </Card>
   );
 }

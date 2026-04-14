@@ -1,28 +1,51 @@
 import { cn } from '@/lib/utils';
 
 const variants = {
-  default:   'bg-violet-600 hover:bg-violet-500 active:bg-violet-700 text-white shadow-lg shadow-violet-600/20',
-  outline:   'border border-white/10 hover:border-white/20 hover:bg-white/5 text-white/70 hover:text-white bg-transparent',
-  ghost:     'hover:bg-white/5 text-white/50 hover:text-white bg-transparent',
-  success:   'bg-green-600 hover:bg-green-500 active:bg-green-700 text-white shadow-lg shadow-green-600/20',
-  danger:    'bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 hover:text-red-300',
-  secondary: 'bg-white/5 hover:bg-white/10 border border-white/8 text-white/80 hover:text-white',
+  default: [
+    'bg-brand hover:bg-brand-hover text-white',
+    'shadow-[0_0_0_1px_rgba(124,58,237,0.5),0_2px_8px_rgba(124,58,237,0.25)]',
+    'hover:shadow-[0_0_0_1px_rgba(124,58,237,0.6),0_4px_16px_rgba(124,58,237,0.3)]',
+  ],
+  outline: [
+    'border border-border-subtle hover:border-border-subtle',
+    'bg-transparent hover:bg-surface-hover',
+    'text-text-secondary hover:text-text-primary',
+  ],
+  ghost: [
+    'bg-transparent hover:bg-surface-hover',
+    'text-text-muted hover:text-text-primary',
+  ],
+  success: [
+    'bg-success-muted hover:bg-[rgba(34,197,94,0.14)]',
+    'border border-success-border hover:border-[rgba(34,197,94,0.28)]',
+    'text-success-text',
+  ],
+  danger: [
+    'bg-danger-muted hover:bg-[rgba(239,68,68,0.12)]',
+    'border border-danger-border hover:border-[rgba(239,68,68,0.28)]',
+    'text-danger-text',
+  ],
+  secondary: [
+    'bg-surface-raised hover:bg-surface-hover',
+    'border border-border',
+    'text-text-secondary hover:text-text-primary',
+  ],
 };
 
 const sizes = {
-  sm: 'px-3.5 py-1.5 text-xs gap-1.5',
-  md: 'px-5 py-2.5 text-sm gap-2',
-  lg: 'px-7 py-3.5 text-base gap-2.5',
+  sm: 'px-3 py-1.5 text-xs gap-1.5 rounded-lg',
+  md: 'px-4 py-2 text-sm gap-2 rounded-xl',
+  lg: 'px-6 py-3 text-base gap-2.5 rounded-xl',
 };
 
 export function Button({ children, variant = 'default', size = 'md', className, disabled, ...props }) {
   return (
     <button
       className={cn(
-        'inline-flex items-center justify-center rounded-full font-medium',
-        'transition-all duration-200 active:scale-95',
-        'disabled:opacity-40 disabled:cursor-not-allowed disabled:active:scale-100',
-        'select-none',
+        'inline-flex items-center justify-center font-medium',
+        'transition-all duration-150 active:scale-[0.96]',
+        'disabled:opacity-35 disabled:cursor-not-allowed disabled:active:scale-100',
+        'select-none focus-ring',
         variants[variant],
         sizes[size],
         className
