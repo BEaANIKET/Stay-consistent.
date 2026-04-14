@@ -24,6 +24,10 @@ const taskSchema = new mongoose.Schema({
   endDate:       { type: String, default: null },
   // YYYY-MM-DD strings for individual days to skip
   excludedDates: [{ type: String }],
+
+  // HH:MM (24-hour) — task is locked (cannot be marked) before this time each day.
+  // null means no restriction — can be marked at any time.
+  availableFrom: { type: String, default: null },
 }, { timestamps: true });
 
 module.exports = mongoose.model('Task', taskSchema);

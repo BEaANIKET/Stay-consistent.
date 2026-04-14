@@ -1,4 +1,4 @@
-import { CheckCircle2, XCircle, Flame, Trophy } from 'lucide-react';
+import { CheckCircle2, XCircle, Flame, Trophy, Lock } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
 import { cn } from '@/lib/utils';
@@ -9,6 +9,29 @@ const STATUS = {
   pending: { card: 'bg-surface       border-border',          bar: null         },
 };
 
+/**
+ * Returns true when the current local time is before task.availableFrom (HH:MM).
+ * If availableFrom is not set, the task is always unlocked.
+ */
+function isLocked(task) {
+  if (!task?.availableFrom) return false;
+
+  const [hh, mm] = task.availableFrom.split(':').map(Number);
+  const now = new Date();
+  const unlockMinutes = hh * 60 + mm;
+  const nowMinutes    = now.getHours() * 60 + now.getMinutes();
+
+  return nowMinutes < unlockMinutes;
+}
+
+/** Format "HH:MM" → "6:00 AM" / "2:30 PM" */
+function formatTime(hhmm) {
+  const [hh, mm] = hhmm.split(':').map(Number);
+  const d = new Date();
+  d.setHours(hh, mm, 0, 0);
+  return d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+}
+
 export default function TaskCard({ taskLog, onMark, marking }) {
   const task = taskLog.taskId;
   if (!task) return null;
@@ -18,6 +41,7 @@ export default function TaskCard({ taskLog, onMark, marking }) {
   const isDone    = status === 'done';
   const isFailed  = status === 'failed';
   const isMarking = marking === task._id;
+  const locked    = isPending && isLocked(task);
 
   const style      = STATUS[status] ?? STATUS.pending;
   const pendingBar = task.type === 'positive' ? 'bg-info' : 'bg-accent';
@@ -26,7 +50,8 @@ export default function TaskCard({ taskLog, onMark, marking }) {
     <div className={cn(
       'group relative rounded-2xl border px-4 py-3.5 transition-all duration-200 animate-scale-in',
       style.card,
-      isPending && 'hover:border-border-subtle hover:bg-surface-hover',
+      isPending && !locked && 'hover:border-border-subtle hover:bg-surface-hover',
+      locked && 'opacity-60',
     )}>
       {/* Left accent bar */}
       <div className={cn(
@@ -53,8 +78,8 @@ export default function TaskCard({ taskLog, onMark, marking }) {
             {task.required && <Badge variant="danger">required</Badge>}
           </div>
 
-          {/* Streak meta */}
-          <div className="flex items-center gap-3 text-xs text-text-muted">
+          {/* Streak meta + unlock time */}
+          <div className="flex items-center gap-3 text-xs text-text-muted flex-wrap">
             <span className="flex items-center gap-1">
               <Flame size={10} className="text-accent-text" />
               <span className="text-text-secondary font-medium tabular-nums">{task.currentStreak}</span>
@@ -70,31 +95,47 @@ export default function TaskCard({ taskLog, onMark, marking }) {
                 {task.relapseCount} relapse{task.relapseCount > 1 ? 's' : ''}
               </span>
             )}
+            {/* Unlock time chip — only shown when task is still locked */}
+            {locked && (
+              <span className="flex items-center gap-1 text-text-muted bg-surface-raised border border-border rounded-md px-1.5 py-0.5">
+                <Lock size={9} />
+                <span>unlocks at {formatTime(task.availableFrom)}</span>
+              </span>
+            )}
           </div>
         </div>
 
         {/* ── Right: actions / status ── */}
         {isPending && (
-          <div className="flex items-center gap-1.5 shrink-0">
-            <Button
-              size="sm"
-              variant="success"
-              onClick={() => onMark(task._id, 'done')}
-              disabled={isMarking}
-            >
-              <CheckCircle2 size={12} />
-              <span className="hidden sm:inline">Done</span>
-            </Button>
-            <Button
-              size="sm"
-              variant="danger"
-              onClick={() => onMark(task._id, 'failed')}
-              disabled={isMarking}
-            >
-              <XCircle size={12} />
-              <span className="hidden sm:inline">Miss</span>
-            </Button>
-          </div>
+          locked ? (
+            /* Locked state — show a muted lock pill instead of buttons */
+            <div className="flex items-center gap-1.5 shrink-0 text-xs text-text-muted bg-surface-raised border border-border rounded-xl px-3 py-1.5">
+              <Lock size={11} />
+              <span className="hidden sm:inline">{formatTime(task.availableFrom)}</span>
+            </div>
+          ) : (
+            /* Unlocked — normal action buttons */
+            <div className="flex items-center gap-1.5 shrink-0">
+              <Button
+                size="sm"
+                variant="success"
+                onClick={() => onMark(task._id, 'done')}
+                disabled={isMarking}
+              >
+                <CheckCircle2 size={12} />
+                <span className="hidden sm:inline">Done</span>
+              </Button>
+              <Button
+                size="sm"
+                variant="danger"
+                onClick={() => onMark(task._id, 'failed')}
+                disabled={isMarking}
+              >
+                <XCircle size={12} />
+                <span className="hidden sm:inline">Miss</span>
+              </Button>
+            </div>
+          )
         )}
 
         {isDone && (

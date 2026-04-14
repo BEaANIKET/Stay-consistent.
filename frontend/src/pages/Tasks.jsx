@@ -19,13 +19,14 @@ const todayISO = () => {
 };
 
 const EMPTY_FORM = () => ({
-  title:        '',
-  type:         'positive',
-  required:     true,
-  scheduleType: 'daily',
-  daysOfWeek:   [],
-  startDate:    todayISO(),
-  endDate:      '',
+  title:          '',
+  type:           'positive',
+  required:       true,
+  scheduleType:   'daily',
+  daysOfWeek:     [],
+  startDate:      todayISO(),
+  endDate:        '',
+  availableFrom:  '',   // HH:MM — task is locked before this time
 });
 
 export default function Tasks() {
@@ -66,13 +67,14 @@ export default function Tasks() {
     e.preventDefault();
     if (!form.title.trim()) return;
     addTask({
-      title:        form.title.trim(),
-      type:         form.type,
-      required:     form.required,
-      scheduleType: form.scheduleType,
-      daysOfWeek:   form.daysOfWeek,
-      startDate:    form.startDate || todayISO(),
-      endDate:      form.endDate || undefined,
+      title:         form.title.trim(),
+      type:          form.type,
+      required:      form.required,
+      scheduleType:  form.scheduleType,
+      daysOfWeek:    form.daysOfWeek,
+      startDate:     form.startDate || todayISO(),
+      endDate:       form.endDate   || undefined,
+      availableFrom: form.availableFrom || undefined,
     });
   };
 

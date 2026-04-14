@@ -23,7 +23,7 @@ const getTasks = async (req, res) => {
 
 const createTask = async (req, res) => {
   try {
-    const { title, type, required, scheduleType, daysOfWeek, startDate, endDate } = req.body;
+    const { title, type, required, scheduleType, daysOfWeek, startDate, endDate, availableFrom } = req.body;
 
     if (!title || !type) {
       return res.status(400).json({ message: 'Title and type are required' });
@@ -42,17 +42,23 @@ const createTask = async (req, res) => {
       return res.status(400).json({ message: 'daysOfWeek values must be 0–6' });
     }
 
+    // Validate HH:MM format if provided
+    if (availableFrom && !/^\d{2}:\d{2}$/.test(availableFrom)) {
+      return res.status(400).json({ message: 'availableFrom must be HH:MM format' });
+    }
+
     const today = getTodayDateString();
 
     const task = await Task.create({
-      userId:       req.user._id,
+      userId:        req.user._id,
       title,
       type,
-      required:     required !== undefined ? required : true,
-      scheduleType: resolvedScheduleType,
-      daysOfWeek:   daysOfWeek || [],
-      startDate:    startDate  || today,
-      endDate:      endDate    || null,
+      required:      required !== undefined ? required : true,
+      scheduleType:  resolvedScheduleType,
+      daysOfWeek:    daysOfWeek    || [],
+      startDate:     startDate     || today,
+      endDate:       endDate       || null,
+      availableFrom: availableFrom || null,
     });
 
     // Add to today's log only if the task is active today
@@ -75,17 +81,24 @@ const updateTask = async (req, res) => {
     const task = await Task.findOne({ _id: req.params.id, userId: req.user._id });
     if (!task) return res.status(404).json({ message: 'Task not found' });
 
-    const { title, type, required, scheduleType, daysOfWeek, startDate, endDate, excludedDates } = req.body;
+    const { title, type, required, scheduleType, daysOfWeek, startDate, endDate, excludedDates, availableFrom } = req.body;
 
     if (title    !== undefined) task.title    = title;
     if (type     !== undefined) task.type     = type;
     if (required !== undefined) task.required = required;
 
-    if (scheduleType   !== undefined) task.scheduleType   = scheduleType;
-    if (daysOfWeek     !== undefined) task.daysOfWeek     = daysOfWeek;
-    if (startDate      !== undefined) task.startDate      = startDate      || null;
-    if (endDate        !== undefined) task.endDate        = endDate        || null;
-    if (excludedDates  !== undefined) task.excludedDates  = excludedDates;
+    if (scheduleType  !== undefined) task.scheduleType  = scheduleType;
+    if (daysOfWeek    !== undefined) task.daysOfWeek    = daysOfWeek;
+    if (startDate     !== undefined) task.startDate     = startDate    || null;
+    if (endDate       !== undefined) task.endDate       = endDate      || null;
+    if (excludedDates !== undefined) task.excludedDates = excludedDates;
+
+    if (availableFrom !== undefined) {
+      if (availableFrom && !/^\d{2}:\d{2}$/.test(availableFrom)) {
+        return res.status(400).json({ message: 'availableFrom must be HH:MM format' });
+      }
+      task.availableFrom = availableFrom || null;
+    }
 
     await task.save();
     res.json({ task });
